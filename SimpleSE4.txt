@@ -1,0 +1,39 @@
+var y,Ey,phi,q,DQ,Ds,Dp,EDp,Dpm,EDs,x,i,DY,resAR_y,resAR_Dp,resAR_i,resAR_x,ys,Eys,phis,Dps,EDps,iis,DYs,resAR_ys,resAR_Dps,resAR_is;
+varexo res_ys,res_Dps,res_iis,res_y,res_Dp,res_i,res_x;
+parameters DYeq,Meta,rn,xeq,DQeq,DYseq,Metas,rns,ay,aphi,ays,aq,bDp,by,br,bm,rhoi,fDp,fy,arr,rhoEy,my,rhoEDp,mDp,cm,cmq,rhos,rhose,rhoDs,asy,aphis,bDps,bys,brs,rhois,fDps,fys,ars,rhoEys,mys,rhoEDps,mDps,rhovy,rhovDp,rhovi,rhovx,stdvy,stdvDp,stdvi,stdvx,rhovys,rhovDps,rhovis,stdvys,stdvDps,stdvis ;
+varobs Ds,Dp,i,DY,Dps,iis,DYs;
+
+model;
+
+DY = 4*(y - y(-1)) + DYeq; 
+y = ay*Ey - aphi*phi + ays*ys + aq*q + resAR_y;   
+q = q(-1) + DQ - DQeq;
+DQ = Dps + Ds - Dp;
+Dp = (1-bDp-bm)*Meta + bDp*EDp + by*(br*y(-1)+(1-br)*y) + bm*Dpm + resAR_Dp;  
+Dpm = cm*Dpm(-1) + (1-cm)*Dpm(+1) + cmq*(Dps(-1)+Ds(-1)-Dpm(-1));
+Ds = rhos*EDs + (1+rhos)*(iis - i + x);
+EDs = rhose*EDs(-1) + ((1-rhose)*rhoDs)/(1+rhoDs)*Ds(+1);
+x = xeq + resAR_x;
+i = rhoi*i(-1) + (1 - rhoi)*((rn + Meta) + fDp*(Dp(+1) - Meta) + fy*y) + resAR_i;   
+phi = arr*(i(-1)-EDp(-1)-rn) + (1 - arr)*(i-EDp-rn);   
+
+Ey = rhoEy*Ey(-4) + (1-rhoEy)*(my*y(-1) + (1-my)*y(+1));    
+EDp = rhoEDp*EDp(-1) + (1-rhoEDp)*(mDp*Dp(-1) + (1-mDp)*Dp(+4));  
+
+resAR_y = rhovy*resAR_y(-1) + res_y;
+resAR_Dp = rhovDp*resAR_Dp(-1) + res_Dp;
+resAR_i = rhovi*resAR_i(-1) + res_i;
+resAR_x = rhovx*resAR_x(-1) + res_x;
+DYs = 4*(ys - ys(-1)) + DYseq; 
+ys = asy*Eys - aphis*phis + resAR_ys;   
+Dps = (1-bDps)*Metas + bDps*EDps + bys*(brs*ys(-1) + (1-brs)*ys) + resAR_Dps;  
+iis = rhois*iis(-1) + (1 - rhois)*((rns + Metas) + fDps*(Dps(+1) - Metas) + fys*ys) + resAR_is;   
+phis = ars*(iis(-1)-EDps(-1)-rns) + (1 - ars)*(iis - EDps - rns);    
+Eys = rhoEys*Eys(-1) + (1-rhoEys)*(mys*ys(-1) + (1-mys)*ys(+1));    
+EDps = rhoEDps*EDps(-1) + (1-rhoEDps)*(mDps*Dps(-1) + (1-mDps)*Dps(+1));      
+resAR_ys = rhovys*resAR_ys(-1) + res_ys;
+resAR_Dps = rhovDps*resAR_Dps(-1) + res_Dps;
+resAR_is = rhovis*resAR_is(-1) + res_iis;
+
+
+end;
