@@ -1,7 +1,7 @@
 var DY, DY_eq, DYs, DYs_eq, Dpae, Dp, D4p, Dpsae, D4psae, ED4p, D4pdev, Dpm, D4pm, Meta, i, ieq, imn, Rmn, Rmn_eq, zmn, rmn, ime, Rme, Rme_eq, zme, rme, Ds, D4s, ED4s, x, x_eq, DQ, q, DQ_eq, y, EDy, rmc, t, g, DTI, tau, Dps, D4ps, Dpms, iext, rs, ys, ieqs, Rs, Rs_eq, z;
 varexo res_DY_eq, res_Dpae, res_Dpsae, res_ED4p, res_Dpm, res_Meta, res_i, res_ieq, res_imn, res_zmn, res_ime, res_zme, res_Ds, res_ED4s, res_x, res_x_eq, res_DQ_eq, res_y, res_EDy, res_t, res_g, res_DTI, res_tau, res_DYs_eq, res_Dps, res_Dpms, res_iext, res_ys, res_ieqs, res_z;  
 parameters DY_ss, rho_DY_eq, Dp_ss, Dps_ss, i_ss, iext_ss, Ds_ss, x_ss, Rmn_ss, Rme_ss , Rs_ss, bm, bsae, by, cy, rho_Dpae, bs, csae, cFL, rho_ED4p, cp, cmm, cmq, cpms, cpsae, fi, fp, fy, cfy, rho_ieq, rho_zmn, cY_mn, cR_mn, rho_zme, cY_me, cR_me, rho_Ds, rho_ED4s, rho_x, rho_DQ, ay, aEy, armc, atau, at, ag, aq, ays, rho_EDy, crmn, crme, chb, rho_DTI, atauc, ataul, rho_t, rho_g, DYs_ss, rho_DYs_eq, bsp, bsy, fsi, fsp, fsy, rho_ieqs, asy, asEy, asr, rho_z, cY_s, m_res_DY_eq, m_res_ieq, m_res_zmn, m_res_zme, m_res_Dpsae, m_res_Dpae, m_res_ED4p, m_res_Dpm, m_res_i, m_res_imn, m_res_ime, m_res_Ds, m_res_ED4s, m_res_x, m_res_DQ_eq, m_res_y, m_res_EDy, m_res_Dps, m_res_iext, m_res_ys, m_res_ieqs, m_res_z, m_res_DYs_eq, m_res_Dpms;
-varobs Dpsae, D4psae, Dpae, Dp, D4p, Meta, Dpm, ED4p, i, imn, ime, Ds, x, ED4s, DTI, DY, EDy, g, t, Dps, Dpms, iext, DYs;
+varobs Dpsae, Dp, Meta, Dpm, ED4p, i, imn, ime, Ds, x, ED4s, DTI, DY, EDy, g, t, Dps, Dpms, iext, DYs;
 
 
 model;
