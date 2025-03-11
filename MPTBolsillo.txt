@@ -1,6 +1,6 @@
 var DY, DY_eq, DYs, DYs_eq, Dpae, Dp, D4p, Dpsae, D4psae, ED4p, D4pdev, Dpm, D4pm, Meta, i, ieq, imn, Rmn, Rmn_eq, zmn, rmn, ime, Rme, Rme_eq, zme, rme, Ds, D4s, ED4s, x, x_eq, DQ, q, DQ_eq, y, EDy, rmc, t, g, DTI, tau, Dps, D4ps, Dpms, iext, rs, ys, ieqs, Rs, Rs_eq, z;
 varexo res_DY_eq, res_Dpae, res_Dpsae, res_ED4p, res_Dpm, res_Meta, res_i, res_ieq, res_imn, res_zmn, res_ime, res_zme, res_Ds, res_ED4s, res_x, res_x_eq, res_DQ_eq, res_y, res_EDy, res_t, res_g, res_DTI, res_tau, res_DYs_eq, res_Dps, res_Dpms, res_iext, res_ys, res_ieqs, res_z;  
-parameters DY_ss, rho_DY_eq, Dp_ss, Dps_ss, i_ss, iext_ss, Ds_ss, x_ss, Rmn_ss, Rme_ss , Rs_ss, bm, bsae, by, cy, rho_Dpae, bs, csae, cFL, rho_ED4p, cp, cmm, cmq, cpms, cpsae, fi, fp, fy, cfy, rho_ieq, rho_zmn, cY_mn, cR_mn, rho_zme, cY_me, cR_me, rho_Ds, rho_ED4s, rho_x, rho_DQ, ay, aEy, armc, atau, at, ag, aq, ays, rho_EDy, crmn, crme, chb, rho_DTI, atauc, ataul, rho_t, rho_g, DYs_ss, rho_DYs_eq, bsp, bsy, fsi, fsp, fsy, rho_ieqs, asy, asEy, asr, rho_z, cY_s, m_res_DY_eq, m_res_ieq, m_res_zmn, m_res_zme, m_res_Dpsae, m_res_Dpae, m_res_ED4p, m_res_Dpm, m_res_i, m_res_imn, m_res_ime, m_res_Ds, m_res_ED4s, m_res_x, m_res_DQ_eq, m_res_y, m_res_EDy, m_res_Dps, m_res_iext, m_res_ys, m_res_ieqs, m_res_z, m_res_DYs_eq, m_res_Dpms;
+parameters DY_ss, rho_DY_eq, Dp_ss, Dps_ss, i_ss, iext_ss, Ds_ss, x_ss, Rmn_ss, Rme_ss , Rs_ss, bm, bsae, by, cy, rho_Dpae, bs, csae, cFL, rho_ED4p, cp, cmm, cmq, cpms, cpsae, fi, fp, fy, cfy, rho_ieq, rho_zmn, cY_mn, cR_mn, rho_zme, cY_me, cR_me, rho_Ds, rho_ED4s, rho_x, rho_DQ, ay, aEy, armc, atau, at, ag, aq, ays, rho_EDy, crmn, crme, chb, rho_DTI, atauc, ataul, rho_t, rho_g, DYs_ss, rho_DYs_eq, bsp, bsy, fsi, fsp, fsy, rho_ieqs, asy, asEy, asr, rho_z, cY_s, m_res_DY_eq, m_res_ieq, m_res_zmn, m_res_zme, m_res_Dpsae, m_res_Dpae, m_res_ED4p, m_res_Dpm, m_res_i, m_res_imn, m_res_ime, m_res_Ds, m_res_ED4s, m_res_x, m_res_DQ_eq, m_res_y, m_res_EDy, m_res_Dps, m_res_iext, m_res_ys, m_res_ieqs, m_res_z, m_res_DYs_eq, m_res_Dpms, m_res_x_eq, m_res_t, m_res_g, m_res_DTI, m_res_tau, m_res_Meta;
 varobs Dpsae, Dp, Meta, Dpm, ED4p, i, imn, ime, Ds, x, ED4s, DTI, DY, EDy, g, t, Dps, Dpms, iext, DYs;
 
 
@@ -10,20 +10,20 @@ model;
 DY = 4*(y - y(-1)) + DY_eq; 
 
 # Crecimiento potencial
-DY_eq = (1 - rho_DY_eq)*DY_ss + rho_DY_eq*DY_eq(-1) + res_DY_eq;
+DY_eq = (1 - rho_DY_eq)*DY_ss + rho_DY_eq*DY_eq(-1) + m_res_DY_eq*res_DY_eq;
 
 # ------------------------------------------------------------------------------
 # Inflaci�n
 # ------------------------------------------------------------------------------
 
 # Curva de Phillips
-Dpsae = bm*D4pm + (1 - bm)*(bsae*Dpsae(-1) + (1 - bsae)*ED4p) +  by*(cy*y + (1 - cy)*y(-1)) + res_Dpsae;
+Dpsae = bm*D4pm + (1 - bm)*(bsae*Dpsae(-1) + (1 - bsae)*ED4p) +  by*(cy*y + (1 - cy)*y(-1)) + m_res_Dpsae*res_Dpsae;
 
 # Inflaci�n SAE (4 trimestres)
 D4psae = (Dpsae + Dpsae(-1) + Dpsae(-2) + Dpsae(-3))/4;
 
 # Inflaci�n alimentos y energ�a
-Dpae = (1 - rho_Dpae)*( bs*Dpsae + (1 - bs)*Dpm )+ rho_Dpae*Dpae(-1) + res_Dpae;
+Dpae = (1 - rho_Dpae)*( bs*Dpsae + (1 - bs)*Dpm )+ rho_Dpae*Dpae(-1) + m_res_Dpae*res_Dpae;
 
 # Inflaci�n total
 Dp = csae*Dpsae + (1 - csae)*Dpae;
@@ -32,39 +32,39 @@ Dp = csae*Dpsae + (1 - csae)*Dpae;
 D4p = (Dp + Dp(-1) + Dp(-2) + Dp(-3))/4;
 
 # Expectativas de inflaci�n
-ED4p = rho_ED4p*ED4p(-1) + (1 - rho_ED4p)*((1 - cp)*D4psae(+4) + cp*D4p(-1)) + res_ED4p;
+ED4p = rho_ED4p*ED4p(-1) + (1 - rho_ED4p)*((1 - cp)*D4psae(+4) + cp*D4p(-1)) + m_res_ED4p*res_ED4p;
 
 # Desv�os de la inflaci�n
 D4pdev = cFL*D4psae(+4) + (1 - cFL)*Dpsae - Meta;
 
 # Inflaci�n importada en S/. (Curva de Phillips importada)
-Dpm = cmm*Dpm(-1) + (1 - cmm)*D4pm(+4) + cmq*( Dpms(-1) + Ds(-1) - Dpm(-1) )+  res_Dpm;
+Dpm = cmm*Dpm(-1) + (1 - cmm)*D4pm(+4) + cmq*( Dpms(-1) + Ds(-1) - Dpm(-1) )+  m_res_Dpm*res_Dpm;
 
 # Inflaci�n importada en S/ (4 trimestres)
 D4pm = (Dpm + Dpm(-1) + Dpm(-2) + Dpm(-3))/4;
 
 # Meta de inflaci�n
-Meta = 0.5*Dp_ss + 0.5*Meta(-1) + res_Meta;
+Meta = 0.5*Dp_ss + 0.5*Meta(-1) + m_res_Meta*res_Meta;
 
 # --------------------------------------------------------------------------------------------------
 # Tasas de inter�s en moneda nacional
 # --------------------------------------------------------------------------------------------------
 
 # Regla de pol�tica monetaria
-i = fi*i(-1) + (1 - fi)*( ieq + fp*D4pdev + fy*( cfy*y + (1 - cfy)*y(-1) ) ) + res_i;
+i = fi*i(-1) + (1 - fi)*( ieq + fp*D4pdev + fy*( cfy*y + (1 - cfy)*y(-1) ) ) + m_res_i*res_i;
 
 # Drift de la Regla de Taylor
-ieq = (1 - rho_ieq)*i_ss + rho_ieq*ieq(-1) + res_ieq;
+ieq = (1 - rho_ieq)*i_ss + rho_ieq*ieq(-1) + m_res_ieq*res_ieq;
 
 # Tasa de inter�s interbancaria en S/
-imn = i + res_imn;
+imn = i + m_res_imn*res_imn;
 
 # Tasa de inter�s real dom�stica
 Rmn = imn - ED4p;
 
 # Tasa de inter�s real dom�stica de equilibrio
 Rmn_eq = zmn + cY_mn*(DY_eq(+1)-DY_ss) + cR_mn*(DYs_eq(+1)-DYs_ss);
-zmn = (1-rho_zmn)*Rmn_ss + rho_zmn*zmn(-1) + res_zmn;
+zmn = (1-rho_zmn)*Rmn_ss + rho_zmn*zmn(-1) + m_res_zmn*res_zmn;
 
 # Brecha de la tasa de inter�s real dom�stica
 rmn = Rmn - Rmn_eq;
@@ -74,14 +74,14 @@ rmn = Rmn - Rmn_eq;
 # --------------------------------------------------------------------------------------------------
 
 # Tasa de inter�s interbancaria en US$ 
-ime = iext + res_ime;
+ime = iext + m_res_ime*res_ime;
 
 # Tasa de inter�s real externa expresada en S/
 Rme = ime - ED4p + ED4s;
 
 # Tasa de inter�s real externa expresada en S/ de equilibrio
 Rme_eq = zme + cY_me*(DY_eq(+1)-DY_ss) + cR_me*(DYs_eq(+1)-DYs_ss);
-zme = (1-rho_zme)*Rme_ss + rho_zme*zme(-1) + res_zme;
+zme = (1-rho_zme)*Rme_ss + rho_zme*zme(-1) + m_res_zme*res_zme;
 
 # Brecha de la tasa de inter�s real externa expresada en S/
 rme = Rme - Rme_eq;
@@ -91,19 +91,19 @@ rme = Rme - Rme_eq;
 # --------------------------------------------------------------------------------------------------
 
 # Paridad descubierta de tasas de inter�s modificada
-Ds = rho_Ds*Ds(+1) + (1 + rho_Ds)*( ime + x - imn + res_Ds );
+Ds = rho_Ds*Ds(+1) + (1 + rho_Ds)*( ime + x - imn + m_res_Ds*res_Ds );
 
 # Depreciaci�n nominal (4 trimestres)
 D4s = (Ds + Ds(-1) + Ds(-2) + Ds(-3))/4;
 
 # Expectativas de depreciaci�n 4 trimestres en adelante
-ED4s = rho_ED4s*ED4s(-1) + (1 - rho_ED4s)*(rho_Ds*D4s(+4) - (Ds - 5*Ds_ss)/4)/(1 + rho_Ds) + res_ED4s;
+ED4s = rho_ED4s*ED4s(-1) + (1 - rho_ED4s)*(rho_Ds*D4s(+4) - (Ds - 5*Ds_ss)/4)/(1 + rho_Ds) + m_res_ED4s*res_ED4s;
 
 # Prima por riesgo cambiario
-x = x_eq + res_x;
+x = x_eq + m_res_x*res_x;
 
 # Prima por riesgo cambiario de equilibrio
-x_eq = (1 - rho_x)*x_ss + rho_x*x_eq(-1) + res_x_eq;
+x_eq = (1 - rho_x)*x_ss + rho_x*x_eq(-1) + m_res_x_eq*res_x_eq;
 
 # Depreciaci�n real
 DQ = Dps + Ds - Dp;
@@ -112,58 +112,58 @@ DQ = Dps + Ds - Dp;
 q = q(-1) + (DQ - DQ_eq)/4;
 
 # Depreciaci�n real de equilibrio
-DQ_eq = rho_DQ*q + res_DQ_eq;
+DQ_eq = rho_DQ*q + m_res_DQ_eq*res_DQ_eq;
 
 # --------------------------------------------------------------------------------------------------
 # Brecha del producto y sus determinantes
 # --------------------------------------------------------------------------------------------------
 
 # Demanda agregada
-y = ay*y(-1) + aEy*(y(-1) + EDy) + armc*rmc(-1) - at*t + ag*g + aq*q + atau*tau+ ays*ys + res_y;
+y = ay*y(-1) + aEy*(y(-1) + EDy) + armc*rmc(-1) - at*t + ag*g + aq*q + atau*tau+ ays*ys + m_res_y*res_y;
 
 # Expectativas de crecimiento de la brecha producto
-EDy = rho_EDy*EDy(-1) + (1 - rho_EDy)*(y(+1) - y(-1)) + res_EDy;
+EDy = rho_EDy*EDy(-1) + (1 - rho_EDy)*(y(+1) - y(-1)) + m_res_EDy*res_EDy;
 
 # �ndice de condiciones monetarias reales
 rmc = -( crmn*rmn + crme*rme + chb*( x - x_eq ) );
 
 # Cambio en los ingresos estructurales
-t = rho_t*t(-1) + res_t;
+t = rho_t*t(-1) + m_res_t*res_t;
 
 # Cambio en el gasto p�blico
-g = rho_g*g(-1) + res_g;
+g = rho_g*g(-1) + m_res_g*res_g;
 
 # Crecimiento anualizado de los t�rminos de intercambio
-DTI = rho_DTI*DTI(-1) + res_DTI;
+DTI = rho_DTI*DTI(-1) + m_res_DTI*res_DTI;
 
 # Impulso de los t�rminos de intercambio
-tau = (ataul + atauc)*tau(-1) - ataul*atauc*tau(-2) + (ataul - atauc)*DTI/4 + res_tau;
+tau = (ataul + atauc)*tau(-1) - ataul*atauc*tau(-2) + (ataul - atauc)*DTI/4 + m_res_tau*res_tau;
 
 # --------------------------------------------------------------------------------------------------
 # Econom�a externa
 # --------------------------------------------------------------------------------------------------
 
 # Curva de Phillips externa
-Dps = bsp*Dps(-1) + (1 - bsp)*D4ps(+4) + bsy*ys(-1) + res_Dps;
+Dps = bsp*Dps(-1) + (1 - bsp)*D4ps(+4) + bsy*ys(-1) + m_res_Dps*res_Dps;
 
 # Inflaci�n externa (IPE puro, 4 trimestres) 
 D4ps = (Dps + Dps(-1) + Dps(-2) + Dps(-3))/4;
 
 # Inflaci�n importada en US$
-Dpms = (1 - cpms)*Dps + cpms*Dps(-1) + res_Dpms;
+Dpms = (1 - cpms)*Dps + cpms*Dps(-1) + m_res_Dpms*res_Dpms;
 
 # Regla de pol�tica monetaria (Libor en US$ a 3 meses)
-iext = fsi*iext(-1) + (1 - fsi)*(ieqs + fsp*(D4ps(+4) - Dps_ss) + fsy*ys) + res_iext;
+iext = fsi*iext(-1) + (1 - fsi)*(ieqs + fsp*(D4ps(+4) - Dps_ss) + fsy*ys) + m_res_iext*res_iext;
 
 # Drift de Regla de Taylor externa
-ieqs = (1-rho_ieqs)*iext_ss + rho_ieqs*ieqs(-1) + res_ieqs;
+ieqs = (1-rho_ieqs)*iext_ss + rho_ieqs*ieqs(-1) + m_res_ieqs*res_ieqs;
 
 # Tasa de inter�s real externa 
 Rs = iext - D4ps(+4);
 
 # Tasa de inter�s real externa de equilibrio
 Rs_eq = z + cY_s*(DYs_eq(+1)-DYs_ss);
-z = (1-rho_z)*Rs_ss + rho_z*z(-1) + res_z;
+z = (1-rho_z)*Rs_ss + rho_z*z(-1) + m_res_z*res_z;
 
 # Brecha de la tasa de inter�s real externa
 rs = Rs - Rs_eq;
@@ -173,9 +173,9 @@ rs = Rs - Rs_eq;
 DYs = 4*(ys-ys(-1)) + DYs_eq;
 
 # Crecimiento potencial de los socios comerciales
-DYs_eq = (1 - rho_DYs_eq)*DYs_ss + rho_DYs_eq*DYs_eq(-1) + res_DYs_eq;
+DYs_eq = (1 - rho_DYs_eq)*DYs_ss + rho_DYs_eq*DYs_eq(-1) + m_res_DYs_eq*res_DYs_eq;
 
 # Demanda agregada externa
-ys = asEy*ys(+1) + asy*ys(-1) - asr*rs(-1) + res_ys; 
+ys = asEy*ys(+1) + asy*ys(-1) - asr*rs(-1) + m_res_ys*res_ys; 
 
 end;
