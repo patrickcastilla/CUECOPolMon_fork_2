@@ -91,6 +91,7 @@ def process_file2(filename):
 def process_file3(file):
     # Se obtienen los datos a partir de process_file2 y se procesan con Mod1
     Y, Yp, Yl, EQ, U, CC, Yobs = process_file2(file)
+    Yoriginal = Y
     Y, Yp, Yl, EQ, U, CC = Mod1(Y, Yp, Yl, EQ, U, CC)
     
     # -------------------------------
@@ -119,9 +120,9 @@ def process_file3(file):
     
     # En este ejemplo se retorna lo que genera la función gen_ModMatFuns (ajusta según lo que necesites)
     if Yobs.rows == 0 or Yobs.cols == 0:
-        return DLM.gen_ModMatFuns(EQ, Yp, Y, Yl, U, CC)
+        return DLM.gen_ModMatFuns(EQ, Yoriginal, Yp, Y, Yl, U, CC)
     else:
-        return DLM.gen_ModMatFuns(EQ, Yp, Y, Yl, U, CC,Yobs)
+        return DLM.gen_ModMatFuns(EQ, Yoriginal, Yp, Y, Yl, U, CC,Yobs)
 
 
     

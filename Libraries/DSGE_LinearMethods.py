@@ -15,6 +15,7 @@ from numpy.random import normal
 from math import sqrt
 from scipy.linalg import ordqz, qz, solve_discrete_lyapunov
 from pandas import DataFrame, DatetimeIndex, Timestamp, Period, to_datetime, date_range
+import pandas as pd
 from HandleTimeSeries import quarterly_dates_from_end, generate_quarterly_dates, get_EndHistory, get_FirstHistory
 import sys
 python_version = sys.version_info
@@ -65,7 +66,7 @@ def sympy_to_list(sympy_array):
     return string_list
 
 # Function to find matrices from symbolic equations (dynare format)
-def gen_ModMatFuns(EQ, Yp, Y, Yl, U, CC, Yobs=None):
+def gen_ModMatFuns(EQ, Yoriginal, Yp, Y, Yl, U, CC, Yobs=None):
     ftildexp = EQ.jacobian(Yp)
     ftildex  = EQ.jacobian(Y)
     ftildexl = EQ.jacobian(Yl)
@@ -161,6 +162,7 @@ def gen_ModMatFuns(EQ, Yp, Y, Yl, U, CC, Yobs=None):
         nobs      = 0
 
     modelo = {'Desc.': {'Endogenous': Y,
+                        'Declared Endogenous': Yoriginal,
                         'States': Yl[kx.tolist(),0],
                         'Shocks': U,
                         'Coefficients': CC,
@@ -360,6 +362,9 @@ def SolveModel(modelo, txt_file_arg=None, flag_print=False):
         gyu = gyu[:ny,:].reshape(-1,nu)
 
         if flag_print:
+            pd.set_option('display.max_rows', None)
+            pd.set_option('display.max_columns', None)
+            pd.set_option('display.max_colwidth', None)
             posy = modelo['Rearranging_index']['declaration2solution'].tolist()
             varnames = modelo['Desc.']['Endogenous'][posy,:]
             varnames = HTS.transformar_matriz_varnames(varnames)
@@ -403,6 +408,9 @@ def SolveModel(modelo, txt_file_arg=None, flag_print=False):
             M2S = r_[gk0.T,gkk.T,gku.T]
             mat2show = DataFrame(M2S, columns=columns, index=index)
             print(mat2show)
+            pd.reset_option('display.max_rows')
+            pd.reset_option('display.max_columns')
+            pd.reset_option('display.max_colwidth')
 
 
     else:
