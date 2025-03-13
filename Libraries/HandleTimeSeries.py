@@ -82,7 +82,7 @@ def get_FirstHistory(DFHistory):
     return index[pos-1]
 
 
-def plotTSforecast(DBdict,lista,listaname,SS,FH,HH=None,nr=None,nc=None):
+def plotTSforecast(DBdict,lista,listaname,SS,FH,HH=None,nr=None,nc=None,SS_plot = True):
     
     nv = len(lista)
     if HH is None:
@@ -98,7 +98,7 @@ def plotTSforecast(DBdict,lista,listaname,SS,FH,HH=None,nr=None,nc=None):
     if (nr is None) and (nc is not None):
         nc = ceil(nv/nr)
 
-    fig, axs = plt.subplots(nr,nc)
+    fig, axs = plt.subplots(nr,nc, figsize=(nc*4, nr * 3))
 
     for ii in range(nv):
         ck = -1
@@ -111,7 +111,9 @@ def plotTSforecast(DBdict,lista,listaname,SS,FH,HH=None,nr=None,nc=None):
                     axs[ii].plot(DB.index[-(FH+1):], DB[lista[ii]][-(FH+1):], linestyle='--',label=str(key))
                 else:
                     axs[ii].plot(DB.index[-(FH+1):], DB[lista[ii]][-(FH+1):], linestyle='--',label=str(key))
-                axs[ii].axhline(y=SS[ii], color='black', linestyle='-.', linewidth=0.75)
+
+                if SS_plot:
+                    axs[ii].axhline(y=SS[ii], color='black', linestyle='-.', linewidth=0.75)
                 axs[ii].axvline(x=DB.index[-(FH+1)], color='black', linestyle='-.', linewidth=0.75)
                 axs[ii].set_title(listaname[ii])
             else:
@@ -122,7 +124,8 @@ def plotTSforecast(DBdict,lista,listaname,SS,FH,HH=None,nr=None,nc=None):
                     axs[nri,nci].plot(DB.index[-(FH+1):], DB[lista[ii]][-(FH+1):], linestyle='--',label=str(key))
                 else:
                     axs[nri,nci].plot(DB.index[-(FH+1):], DB[lista[ii]][-(FH+1):], linestyle='--',label=str(key))
-                axs[nri,nci].axhline(y=SS[ii], color='black', linestyle='-.', linewidth=0.75)
+                if SS_plot:
+                    axs[nri,nci].axhline(y=SS[ii], color='black', linestyle='-.', linewidth=0.75)
                 axs[nri,nci].axvline(x=DB.index[-(FH+1)], color='black', linestyle='-.', linewidth=0.75)
                 axs[nri,nci].set_title(listaname[ii])
         if ii==0:
