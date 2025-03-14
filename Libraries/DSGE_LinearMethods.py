@@ -497,7 +497,7 @@ def getIRF(modelo,Horizon=20):
 
 def simulateDSGE(modelo,Thorizon,dateend):
     order  = modelo['Rearranging_index']['declaration2solution'].tolist()
-    vnames = sympy_to_list(modelo['Desc.']['Endogenous'][order,:])
+    vnames = sympy_to_list(HTS.transformar_matriz_varnames(modelo['Desc.']['Endogenous'][order,:]))
     c      = modelo['StateSpaceForm']['c']
     T      = modelo['StateSpaceForm']['T']
     R      = modelo['StateSpaceForm']['R']
