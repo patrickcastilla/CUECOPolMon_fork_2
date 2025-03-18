@@ -1,0 +1,18 @@
+# Compiled source #
+###################
+*.bst
+*.bib
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.tex
+*.png
+*.nav
+*.run.xml
+*.snm
+*.toc
+ConfigProxy.py
+__pycache__

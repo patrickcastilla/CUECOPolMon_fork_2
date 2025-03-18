@@ -93,6 +93,12 @@
     m_res_z = 
     m_res_DYs_eq = 
     m_res_Dpms = 
+    m_res_x_eq = 
+    m_res_t = 
+    m_res_g = 
+    m_res_DTI = 
+    m_res_tau = 
+    m_res_Meta = 
 
     # Definir los valores de Y
     DY = 
