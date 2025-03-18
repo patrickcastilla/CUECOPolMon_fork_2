@@ -487,8 +487,8 @@ def getIRF(modelo,Horizon=20):
     
     index      = arange(Horizon)
     Order_declaration2sol=modelo['Rearranging_index']['declaration2solution']
-    varnames   = sympy_to_list(modelo['Desc.']['Endogenous'][Order_declaration2sol.tolist(),0])
-    shocknames = sympy_to_list(modelo['Desc.']['Shocks'])
+    varnames   = sympy_to_list(HTS.transformar_matriz_varnames(modelo['Desc.']['Endogenous'][Order_declaration2sol.tolist(),0]))
+    shocknames = sympy_to_list(HTS.transformar_matriz_varnames(modelo['Desc.']['Shocks']))
     IRFdict = dict()
     for ss in range(nu):
         IRFdict[shocknames[ss]] = DataFrame(IRF[:,:,ss], columns=varnames, index=index)
