@@ -94,6 +94,7 @@ def process_file3(file):
     Yoriginal = Y
     Y, Yp, Yl, EQ, U, CC = Mod1(Y, Yp, Yl, EQ, U, CC)
     
+    '''
     # -------------------------------
     # Generar el archivo CC_Y0.txt
     # -------------------------------
@@ -117,6 +118,7 @@ def process_file3(file):
                 else:
                     f.write(f"    {var_str} = \n")
             f.write("\n")
+    '''
     
     # En este ejemplo se retorna lo que genera la función gen_ModMatFuns (ajusta según lo que necesites)
     if Yobs.rows == 0 or Yobs.cols == 0:
