@@ -15,5 +15,5 @@
 *.snm
 *.toc
 ConfigProxy.py
-/Ignorar_Backup/
-/__pycache__/
+Ignorar_Backup/
+__pycache__/
