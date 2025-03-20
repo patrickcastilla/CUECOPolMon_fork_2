@@ -14,6 +14,7 @@
 *.run.xml
 *.snm
 *.toc
+Fundamentos_MPT_*.pptx
 ConfigProxy.py
 Ignorar_Backup/
 __pycache__/
