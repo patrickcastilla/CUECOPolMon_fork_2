@@ -16,4 +16,6 @@
 *.toc
 ConfigProxy.py
 Ignorar_Backup/
+Ignorar_Backup/**
 __pycache__/
+__pycache__/**
