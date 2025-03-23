@@ -14,7 +14,5 @@
 *.run.xml
 *.snm
 *.toc
-01_NotasDeClase/Fundamentos_MPT_*.pptx
 ConfigProxy.py
-Ignorar_Backup/
-__pycache__/
+__pycache__
